@@ -7,28 +7,32 @@ import lombok.Setter;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.util.Set;
 import java.util.UUID;
 
-@Entity(name = "User")
+@Entity(name = "Event")
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
-public class UserEntity {
+public class EventEntity {
     @Id
     @Type(type = "uuid-char")
     private final UUID id = UUID.randomUUID();
 
-    @Column(unique = true)
-    private String login;
-
-    private String password;
+    private Date date;
 
     @Column(unique = true)
-    private String email;
+    private String name;
 
-    private String nickName;
+    private String address;
+
+    @Enumerated(EnumType.STRING)
+    private AccessToEvent accessToEvent;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private UserEntity organizer;
 
     @OneToMany(mappedBy = "participant", fetch = FetchType.EAGER)
     private Set<ParticipationEntity> participations;

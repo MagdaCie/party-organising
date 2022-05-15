@@ -1,15 +1,9 @@
 package pl.sda.partyorganising.repository;
 
-import lombok.Data;
 import org.springframework.data.jpa.repository.JpaRepository;
-import pl.sda.partyorganising.Entity.Comment;
-import pl.sda.partyorganising.Entity.Event;
-import pl.sda.partyorganising.Entity.User;
+import pl.sda.partyorganising.entity.CommentEntity;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.UUID;
 
-
-public interface CommentRepository extends JpaRepository<Comment,Long> {
-    List<Comment> findCommentByUserId(User user);
+public interface CommentRepository extends JpaRepository<CommentEntity, UUID> {
 }

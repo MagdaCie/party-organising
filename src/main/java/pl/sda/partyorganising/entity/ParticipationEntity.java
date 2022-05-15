@@ -8,6 +8,7 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.UUID;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -16,13 +17,17 @@ import java.util.UUID;
 public class ParticipationEntity {
     @Id
     @Type(type = "uuid-char")
-    private final UUID id=UUID.randomUUID();
+    private final UUID id = UUID.randomUUID();
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
-    private UserEntity user;
+    @JoinColumn(name = "event_id")
+    private EventEntity event;
 
-    private String eventId;
-    private ParticipationStatus participationStatus;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "participant_id")
+    private UserEntity participant;
 
+    private ApprovalStatus organizerApprovalStatus;
+
+    private ApprovalStatus participantApprovalStatus;
 }

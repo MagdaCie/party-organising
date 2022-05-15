@@ -1,5 +1,5 @@
 package pl.sda.partyorganising.entity;
 
-public enum ParticipationStatus {
+public enum ApprovalStatus {
     WaitingForResponse, Accepted, Rejected
 }
