@@ -1,32 +1,35 @@
 package pl.sda.partyorganising.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-
-public class Comment {
-
-@Data
+import java.util.UUID;
 @Entity
+@JsonIgnoreProperties
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIgnoreProperties
+public class CommentEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @Type(type = "uuid-char")
+    private final UUID id = UUID.randomUUID();
 
     public String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "event_id", referencedColumnName = "id")
-    private Event event;
+    private EventEntity eventEntity;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name ="user_id", referencedColumnName = "id")
-    private User user;
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private UserEntity user;
 
 }
