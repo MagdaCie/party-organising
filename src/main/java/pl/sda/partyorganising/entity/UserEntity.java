@@ -6,9 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity(name = "User")
@@ -20,9 +19,17 @@ public class UserEntity {
     @Id
     @Type(type = "uuid-char")
     private final UUID id = UUID.randomUUID();
+
     @Column(unique = true)
     private String login;
+
+    private String password;
+
     @Column(unique = true)
     private String email;
+
     private String nickName;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private Set<ParticipationEntity> participations;
 }
