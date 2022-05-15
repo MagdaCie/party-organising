@@ -29,5 +29,5 @@ public class ParticipationEntity {
 
     private ApprovalStatus organizerApprovalStatus;
 
-    private ApprovalStatus participantApprovalStatus
+    private ApprovalStatus participantApprovalStatus;
 }
