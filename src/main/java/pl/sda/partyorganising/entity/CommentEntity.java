@@ -1,4 +1,4 @@
-package pl.sda.partyorganising.Entity;
+package pl.sda.partyorganising.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -10,7 +10,7 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.UUID;
-@Entity
+@Entity(name = "Comment")
 @JsonIgnoreProperties
 @Getter
 @Setter
@@ -25,11 +25,11 @@ public class CommentEntity {
     public String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "event_id", referencedColumnName = "id")
+    @JoinColumn(name = "event_id")
     private EventEntity eventEntity;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_id")
     private UserEntity user;
 
 }

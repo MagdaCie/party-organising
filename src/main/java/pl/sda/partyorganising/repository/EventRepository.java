@@ -1,11 +1,9 @@
 package pl.sda.partyorganising.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import pl.sda.partyorganising.Entity.Comment;
-import pl.sda.partyorganising.Entity.Event;
+import pl.sda.partyorganising.entity.EventEntity;
 
-import java.util.List;
+import java.util.UUID;
 
-public interface EventRepository extends JpaRepository <Event, Long> {
-    List<Comment> findEventByComment(Comment comment)
+public interface EventRepository extends JpaRepository<EventEntity, UUID> {
 }
