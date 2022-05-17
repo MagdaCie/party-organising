@@ -2,14 +2,13 @@ package pl.sda.partyorganising.web.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
+import pl.sda.partyorganising.entity.EventEntity;
 import pl.sda.partyorganising.service.EventService;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -18,6 +17,15 @@ import java.util.UUID;
 public class EventsController {
 
     private final EventService eventService;
+
+    @GetMapping
+    public ResponseEntity<List<EventEntity>> getEvents(){
+        return ResponseEntity.ok(eventService.getEvents());
+    }
+    @GetMapping("/events/{id}")
+    public ResponseEntity<EventEntity> getEvent(@PathVariable("id") UUID uuid) {
+        return ResponseEntity.ok(eventService.getEvent(uuid));
+    }
 
     @PostMapping()
     public ResponseEntity<Void> createNewEvent(@RequestBody CreateEventRequest request, UriComponentsBuilder uriComponentsBuilder) {
